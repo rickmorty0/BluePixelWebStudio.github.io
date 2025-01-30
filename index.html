@@ -196,13 +196,12 @@
             right: 10px;
         }
 
-       /* Estilos do carrossel de imagens */
+      /* Estilos do carrossel de imagens */
 #carrossel {
     width: 100%;
-    height: 100vh; /* Altura do carrossel igual à altura da tela */
-    max-height: 100vh; /* Garante que o carrossel não ultrapasse a tela */
+    height: 100vh; /* Mantém a altura total da tela */
+    max-height: 100vh;
     overflow: hidden;
-    margin-top: 20px;
     position: relative;
     display: flex;
     align-items: center;
@@ -211,35 +210,25 @@
 
 #carrossel-inner {
     display: flex;
-    transition: transform 1s ease;
     width: 100%;
     height: 100%;
+    transition: transform 0.8s ease-in-out;
 }
 
 .carrossel-item {
-    min-width: 100%;
+    flex: 0 0 100%; /* Ocupa exatamente 100% da largura do carrossel */
     height: 100%;
-    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #carrossel-inner img {
-    width: 100%; /* Faz a imagem ocupar toda a largura */
-    height: 100%; /* Faz a imagem ocupar toda a altura */
-    object-fit: cover; /* Garante que a imagem cubra toda a área sem distorcer */
+    width: 100%; /* Ocupa toda a largura do item */
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem sem deixar espaços */
 }
 
-/* Estilo da seção "Sobre" para evitar sobreposição */
-.sobre {
-    text-align: center;
-    padding: 30px 0;
-}
-
-body {
-    margin: 0;
-}
 
 </style>
   <script>
@@ -658,23 +647,27 @@ body {
     // Rolar automaticamente a cada 7 segundos
     setInterval(moveToNextPromo, 7000);
 
-    // Carrossel principal (exemplo)
-    let currentIndex = 0;
-    const items = document.querySelectorAll('.carrossel-item');
-    const totalItems = items.length;
+    // Seleciona os elementos do carrossel
+let currentIndex = 0;
+const items = document.querySelectorAll('.carrossel-item');
+const totalItems = items.length;
+const carrosselInner = document.querySelector('#carrossel-inner');
 
-    function moveToNext() {
-        currentIndex = (currentIndex + 1) % totalItems;
-        updateCarousel();
-    }
+function moveToNext() {
+    currentIndex = (currentIndex + 1) % totalItems;
+    updateCarousel();
+}
 
-    function updateCarousel() {
-        const newTransformValue = -currentIndex * 100;
-        document.querySelector('#carrossel-inner').style.transform = `translateX(${newTransformValue}%)`;
-    }
+function updateCarousel() {
+    const newTransformValue = -currentIndex * 100 + "%";
+    carrosselInner.style.transition = "transform 0.8s ease-in-out";
+    carrosselInner.style.transform = `translateX(${newTransformValue})`;
+}
 
-    // Rolar automaticamente a cada 4 segundos
-    setInterval(moveToNext, 4000);
+// Rolar automaticamente a cada 4 segundos
+setInterval(moveToNext, 4000);
+
+
 </script>
 
 </body>
