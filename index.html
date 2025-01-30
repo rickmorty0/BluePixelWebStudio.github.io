@@ -196,10 +196,10 @@
             right: 10px;
         }
 
-      /* Estilos do carrossel de imagens */
+    /* Estilos do carrossel de imagens */
 #carrossel {
     width: 100%;
-    height: 100vh; /* Mantém a altura total da tela */
+    height: 100vh; /* Mantém a altura total em telas grandes */
     max-height: 100vh;
     overflow: hidden;
     position: relative;
@@ -208,6 +208,7 @@
     justify-content: center;
 }
 
+/* Ajuste do contêiner interno */
 #carrossel-inner {
     display: flex;
     width: 100%;
@@ -216,17 +217,31 @@
 }
 
 .carrossel-item {
-    flex: 0 0 100%; /* Ocupa exatamente 100% da largura do carrossel */
+    flex: 0 0 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* Ajuste da imagem para se adaptar melhor */
 #carrossel-inner img {
-    width: 100%; /* Ocupa toda a largura do item */
-    height: 100%;
-    object-fit: cover; /* Ajusta a imagem sem deixar espaços */
+    width: 80%; /* Imagem menor por padrão */
+    height: auto;
+    max-height: 80vh; /* Garante que a imagem não ultrapasse a tela */
+    object-fit: contain; /* Mantém a proporção sem cortes */
+}
+
+/* Estilos específicos para telas menores (celulares) */
+@media (max-width: 768px) {
+    #carrossel {
+        height: 60vh; /* Reduz a altura do carrossel em celulares */
+    }
+
+    #carrossel-inner img {
+        width: 90%; /* Aumenta um pouco a largura para melhor adaptação */
+        max-height: 50vh; /* Reduz a altura da imagem para não ficar gigante */
+    }
 }
 
 
