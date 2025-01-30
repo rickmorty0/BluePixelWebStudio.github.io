@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desenvolvedor Web</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+        /* Estilos para o botão */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            font-size: 32px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .whatsapp-button img {
+            width: 50px;  /* Ajuste o tamanho do ícone */
+            height: 50px;
+        }
+         /* Estilos do carrossel */
+         .carousel {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .carousel-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .carousel-item p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        /* Setando o tempo de transição */
+        .carousel-container {
+            position: relative;
+        }
+
+           /* Estilos do carrossel */
+        .carousel {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .carousel-item img {
+            width: 150px; /* Tamanho ajustado da imagem */
+            height: 150px;
+            border-radius: 50%; /* Faz a imagem ficar circular */
+            margin-bottom: 20px;
+            object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+            border: 4px solid #25D366; /* Borda verde em torno da imagem */
+        }
+
+        .carousel-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .carousel-item p {
+            font-size: 16px;
+            color: #777;
+        }
+
+        /* Setando o tempo de transição */
+        .carousel-container {
+            position: relative;
+        }
+
+        /* Estilos do carrossel de promoções */
+        .promo-carousel {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .promo-carousel-inner {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .promo-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .promo-item h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #ff5722; /* Cor para o título da promoção */
+        }
+
+        .promo-item p {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .promo-item .btn {
+            background-color: #ff5722;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        .promo-item .btn:hover {
+            background-color: #e64a19;
+        }
+
+        /* Controles de navegação */
+        .carousel-container {
+            position: relative;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
+
+        /* Estilos do carrossel de imagens */
+        #carrossel {
+            width: 100%;
+            height: 100vh; /* Altura do carrossel igual à altura total da tela */
+            overflow: hidden;
+            margin-top: 20px; /* Espaço acima do carrossel */
+            position: relative;
+        }
+
+        #carrossel-inner {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carrossel-item {
+            min-width: 100%;
+            height: 100%; /* Ajusta a altura para ocupar toda a tela */
+            flex-shrink: 0; /* Garante que as imagens não encolham */
+        }
+
+        #carrossel-inner img {
+            width: 80%;  /* Ajusta a largura da imagem para 80% */
+        height: auto;  /* Mantém a proporção da altura */
+        margin: 0 auto;  /* Centraliza a imagem */
+        object-fit: contain; /* Ou 'cover' se você quiser que a imagem cubra a área */
+        }
+
+        /* Estilo do conteúdo acima do carrossel */
+        .sobre {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Ajuste da seção "Sobre" para não sobrepor o carrossel */
+        body {
+            margin-top: 0;
+        }
+</style>
+  <script>
+    function generateLandingPage() {
+      const title = document.getElementById('landing-title').value;
+      const subtitle = document.getElementById('landing-subtitle').value;
+      const description = document.getElementById('landing-description').value;
+      const bgColor = document.getElementById('background-color').value;
+      const textColor = document.getElementById('text-color').value;
+      const buttonText = document.getElementById('button-text').value;
+      const buttonColor = document.getElementById('button-color').value;
+      const buttonTextColor = document.getElementById('button-text-color').value;
+      const buttonLink = document.getElementById('button-link').value;
+      const secondaryButtonText = document.getElementById('secondary-button-text').value;
+      const secondaryButtonLink = document.getElementById('secondary-button-link').value;
+      const logoImage = document.getElementById('logo-image').files[0];
+      const backgroundImage = document.getElementById('background-image').files[0];
+      const price = document.getElementById('price').value;
+      const fontFamily = document.getElementById('font-family').value;
+
+      let logoURL = '';
+      if (logoImage) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+          logoURL = reader.result;
+          createHTML();
+        };
+        reader.readAsDataURL(logoImage);
+      } else {
+        createHTML();
+      }
+
+      function createHTML() {
+        const backgroundImageURL = backgroundImage ? URL.createObjectURL(backgroundImage) : '';
+        const htmlContent = `
+          <!DOCTYPE html>
+          <html lang="pt-br">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${title}</title>
+            <style>
+              body { 
+                background-color: ${bgColor}; 
+                font-family: ${fontFamily}; 
+                text-align: center; 
+                padding: 50px; 
+                color: ${textColor}; 
+                ${backgroundImageURL ? `background-image: url(${backgroundImageURL}); background-size: cover;` : ''}
+              }
+              h1 { color: ${textColor}; }
+              h2 { color: ${textColor}; }
+              p { color: ${textColor}; }
+              .price { font-size: 1.5rem; font-weight: bold; color: ${textColor}; }
+              button { 
+                background-color: ${buttonColor}; 
+                color: ${buttonTextColor}; 
+                padding: 12px 30px; 
+                border: none; 
+                border-radius: 8px; 
+                cursor: pointer; 
+                transition: background-color 0.3s ease; 
+              }
+              button:hover { 
+                background-color: ${buttonTextColor}; 
+                color: ${buttonColor}; 
+              }
+              .logo { max-width: 150px; margin: 0 auto 20px; }
+
+              
+
+              
+            </style>
+          </head>
+          <body>
+            ${logoURL ? `<img src="${logoURL}" alt="Logo" class="logo">` : ''}
+            <h1>${title}</h1>
+            ${subtitle ? `<h2>${subtitle}</h2>` : ''}
+            <p>${description}</p>
+            ${price ? `<p class="price">Preço: ${price}</p>` : ''}
+            <button onclick="window.location.href='${buttonLink}'">${buttonText}</button>
+            ${secondaryButtonText ? `<button onclick="window.location.href='${secondaryButtonLink}'">${secondaryButtonText}</button>` : ''}
+          </body>
+          </html>
+        `;
+
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'landing-page.html';
+        link.click();
+      }
+    }
+    <!-- Scripts para rotação automática -->
+    <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+
+        function moveToNext() {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const newTransformValue = -currentIndex * 100;
+            document.querySelector('.carousel-inner').style.transform = `translateX(${newTransformValue}%)`;
+        }
+
+        // Rolar automaticamente a cada 4 segundos
+        setInterval(moveToNext, 4000);
+
+        
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-100 to-indigo-300 text-gray-800">
+
+    <body>
+        <!-- Botão do WhatsApp -->
+        <a href="https://wa.me/5518981500400" target="_blank" class="whatsapp-button">
+            <img src="img/whats.png" alt="WhatsApp"> <!-- Substitua o caminho do ícone -->
+        </a>
+    </body>
+
+   
+    <!-- Seção da Capa -->
+<section id="logo-capa" class="relative w-full h-80 flex items-center justify-center">
+    <!-- Imagem de Capa no Fundo -->
+    <img src="img/logo.png" alt="Capa de Fundo" class="absolute inset-0 w-full h-full object-cover opacity-70">
+  
+    <!-- Logo e Conteúdo Sobreposto -->
+    <div class="relative z-10 flex flex-col items-center">
+      <img src="img/logo.png" alt="BluePixel Web Studio Logo" class="w-40 md:w-48 lg:w-56 rounded-full shadow-lg">
+    </div>
+  </section>
+  
+  <!-- Cabeçalho e Navegação -->
+  <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 shadow-lg">
+    <nav class="container mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold">BluePixel Web Studio</h1>
+      <ul class="flex space-x-6">
+        <li><a href="#about" class="hover:text-gray-300 transition">Sobre Nós</a></li>
+        <li><a href="#projects" class="hover:text-gray-300 transition">Projetos</a></li>
+        <li><a href="#contact" class="hover:text-gray-300 transition">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- Carrossel de Imagens -->
+    <div id="carrossel">
+        <div id="carrossel-inner">
+            <div class="carrossel-item">
+                <img src="https://www.omentordigital.com.br/wp-content/uploads/2022/08/criacao-de-sites-porto-alegre.jpg" alt="Imagem 1">
+            </div>
+            <div class="carrossel-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHk80u6gFvGwr_4NGoDC--unzluGClYfbsRBKQPr2MJwb4gW_tFUl2hRkizerqjlVaUFc&usqp=CAU" alt="Imagem 2">
+            </div>
+            <div class="carrossel-item">
+                <img src="https://suamarka.com.br/wp-content/uploads/2022/01/Por-que-ter-um-site-1030x910.jpg" alt="Imagem 3">
+            </div>
+            <div class="carrossel-item">
+                <img src="https://penze.com.br/wp-content/uploads/2017/07/qual-a-importancia-de-um-site-bemfeito-para-a-sua-empresa-1.png" alt="Imagem 4">
+            </div>
+        </div>
+    </div>
+  
+  
+
+  <main class="container mx-auto py-12">
+
+
+       
+    <body class="bg-gray-100 text-gray-900">
+        <header class="bg-indigo-600 text-white p-6 text-center">
+          <h1 class="text-3xl font-bold">Criação de Sites para Pequenas Empresas</h1>
+          <p class="text-lg mt-2">Tenha uma presença digital profissional para o seu negócio!</p>
+        </header>
+      
+        <main class="max-w-4xl mx-auto p-6">
+          <section class="bg-white p-6 shadow-lg rounded-lg text-center">
+            <h2 class="text-2xl font-semibold">Desenvolvemos seu site profissional</h2>
+            <p class="mt-4 text-gray-700">Oferecemos páginas otimizadas, responsivas e personalizadas para sua empresa crescer online.</p>
+            <ul class="mt-4 text-left text-gray-600">
+              <li>&#10004; Design moderno e responsivo</li>
+              <li>&#10004; Integração com chatbots</li>
+              <li>&#10004; Sites rápidos e otimizados para SEO</li>
+              <li>&#10004; Suporte e manutenção</li>
+            </ul>
+            <p class="text-xl font-bold text-indigo-600 mt-6">A partir de R$99,00</p>
+            <a href="#contato" class="mt-4 inline-block bg-indigo-600 text-white py-2 px-6 rounded-lg text-lg shadow-md hover:bg-indigo-700">Solicitar Orçamento</a>
+          </section>
+        </main>
+
+        <!-- Chatbot -->
+<section id="chatbot" class="bg-gray-100 py-12">
+    <h2 class="text-4xl font-extrabold mb-6 text-center">Transforme Seu Atendimento com Chatbots</h2>
+    <p class="text-lg mb-8 text-center">Os chatbots são a solução perfeita para melhorar o atendimento ao cliente e aumentar as vendas. Descubra como a automação pode transformar sua empresa!</p>
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-xl text-gray-700 mb-4">Com um chatbot integrado ao seu site, sua empresa pode oferecer suporte 24/7, responder perguntas frequentes e até mesmo guiar os clientes durante o processo de compra. Isso não só melhora a experiência do usuário, mas também aumenta as taxas de conversão, tornando o processo de vendas mais ágil e eficaz.</p>
+      <ul class="text-left text-gray-600 mb-6">
+        <li>&#10004; Respostas instantâneas a perguntas frequentes</li>
+        <li>&#10004; Atendimento personalizado em tempo real</li>
+        <li>&#10004; Automação de agendamentos e vendas</li>
+        <li>&#10004; Coleta de dados valiosos para otimizar estratégias</li>
+      </ul>
+      <p class="text-xl text-indigo-600 font-semibold">Aumente suas vendas e reduza o tempo de resposta com um chatbot inteligente!</p>
+      <a href="#contato" class="mt-6 inline-block bg-indigo-600 text-white py-2 px-6 rounded-lg text-lg shadow-md hover:bg-indigo-700 transition-all">Saiba Mais sobre Chatbots</a>
+    </div>
+  </section><br><br>
+
+  <!-- Carrossel de Promoções -->
+    <div class="promo-carousel">
+        <div class="promo-carousel-inner">
+            <!-- Item 1 -->
+            <div class="promo-item">
+                <h3>Promoção primeiro site: Desconto de 30%</h3>
+                <p>Contrate nossos serviços de atendimento e ganhe 30% de desconto no pacote completo.</p>
+                <a href="#" class="btn">Saiba Mais</a>
+            </div>
+            <!-- Item 2 -->
+            <div class="promo-item">
+                <h3>Promoção leve 3 pague 2: Combo de Serviços</h3>
+                <p>Contrate 3 serviços e pague apenas 2! Aproveite essa oportunidade para expandir seu negócio.</p>
+                <a href="#" class="btn">Saiba Mais</a>
+            </div>
+            <!-- Item 3 -->
+            <div class="promo-item">
+                <h3>Promoção 1 site gratis: Primeira Consulta Grátis</h3>
+                <p>Agende uma consulta conosco e tenha a primeira totalmente grátis. Não perca essa chance!</p>
+                <a href="#" class="btn">Saiba Mais</a>
+            </div>
+            <!-- Item 4 -->
+            <div class="promo-item">
+                <h3>Promoção : Pacote de Serviços por Preço Especial</h3>
+                <p>Adquira um pacote de serviços e pague com 15% de desconto. Só até o final do mês!</p>
+                <a href="#" class="btn">Saiba Mais</a>
+            </div>
+        </div>
+    </div>
+  
+  
+
+
+
+
+    <!-- Sobre -->
+    <section id="about" class="mb-20">
+      <h2 class="text-4xl font-extrabold mb-6">Sobre Nós</h2>
+      <p class="text-lg mb-8">A BluePixel Web Studio é uma agência de desenvolvimento web focada em criar soluções digitais personalizadas para nossos clientes. Somos especializados em criar sites modernos e eficientes que ajudam empresas a se destacar online.</p>
+      <div class="flex flex-wrap justify-center">
+        <div class="w-full md:w-1/3 px-4 mb-8">
+          <div class="bg-white shadow-xl rounded-2xl p-8 text-center">
+            <h3 class="text-2xl font-semibold mb-4">Missão</h3>
+            <p>Transformar ideias em soluções digitais inovadoras, proporcionando uma experiência única para nossos clientes e seus usuários.</p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 px-4 mb-8">
+          <div class="bg-white shadow-xl rounded-2xl p-8 text-center">
+            <h3 class="text-2xl font-semibold mb-4">Visão</h3>
+            <p>Ser uma referência no desenvolvimento web, criando sites e soluções que conectam empresas com seus clientes de maneira eficiente e impactante.</p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 px-4 mb-8">
+          <div class="bg-white shadow-xl rounded-2xl p-8 text-center">
+            <h3 class="text-2xl font-semibold mb-4">Valores</h3>
+            <p>Compromisso, inovação, e excelência são os valores que norteiam todas as nossas ações para entregar resultados excepcionais.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+<section id="projects" class="mb-20">
+    <h2 class="text-4xl font-extrabold mb-6">Nossos Projetos</h2>
+    <p class="text-lg mb-8">Veja alguns dos nossos projetos recentes e como ajudamos nossos clientes a crescer online.</p>
+    <div class="flex flex-wrap justify-center gap-8">
+      <!-- Projeto 1 -->
+      <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-8">
+        <div class="bg-white shadow-xl rounded-lg p-6 text-center">
+          <img src="https://taco.vtexassets.com/assets/vtex/assets-builder/taco.store-theme/3.0.1/img/logo-black--new___7d12f25a6ee2537a12efdbf390af763f.png" alt="Projeto 1" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-semibold mb-2">Projeto TACO</h3>
+          <p class="text-gray-600 mb-4">Desenvolvemos um site moderno e responsivo para uma loja de roupas.</p>
+          <a href="https://www.taco.com.br/?srsltid=AfmBOooMu16r6ML196cheU8bqMCYjTffrbzgpfKQDV1arP05iLozzQwG" target="_blank" class="text-blue-600 font-semibold hover:underline">Veja o Projeto</a>
+        </div>
+      </div>
+      <!-- Projeto 2 -->
+      <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-8">
+        <div class="bg-white shadow-xl rounded-lg p-6 text-center">
+          <img src="data:image/png;base64,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" alt="Projeto 2" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-semibold mb-2">Projeto doctoralia</h3>
+          <p class="text-gray-600 mb-4">Criamos um site para um consultório de médicos, com agendamento online.</p>
+          <a href="https://www.doctoralia.com.br" target="_blank" class="text-blue-600 font-semibold hover:underline">Veja o Projeto</a>
+        </div>
+      </div>
+      <!-- Projeto 3 -->
+      <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-8">
+        <div class="bg-white shadow-xl rounded-lg p-6 text-center">
+          <img src="https://wewritebetter.com.br/wp-content/uploads/2023/08/logomarca-agencia-de-seo-wwb-home.png.webp" alt="Projeto 3" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-semibold mb-2">Projeto wewritebetter</h3>
+          <p class="text-gray-600 mb-4">Desenvolvemos um e-commerce de sucesso para uma empresa de eletrônicos.</p>
+          <a href="https://wewritebetter.com.br/blog/e-commerce-de-eletronicos" target="_blank" class="text-blue-600 font-semibold hover:underline">Veja o Projeto</a>
+        </div>
+      </div>
+      <!-- Projeto 3 -->
+      <div class="w-full sm:w-1/2 md:w-1/3 px-4 mb-8">
+        <div class="bg-white shadow-xl rounded-lg p-6 text-center">
+          <img src="data:image/jpeg;base64,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" alt="Projeto 3" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-semibold mb-2">Projeto pizzahut</h3>
+          <p class="text-gray-600 mb-4">Fizemos um site para uma pizzaria.</p>
+          <a href="https://pizzahut.com.br" target="_blank" class="text-blue-600 font-semibold hover:underline">Veja o Projeto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <h1 class="text-3xl font-bold">   e muito mais entre em contato para tirar as dúvida.</h1><br><br>
+
+  
+
+<!-- Carrossel de Agradecimentos -->
+<div class="carousel">
+    <div class="carousel-inner">
+        
+        <div class="carousel-item">
+            <img src="https://media.istockphoto.com/id/1553415607/pt/foto/business-people-asian-man-and-talking-to-colleague-in-office-for-planning-project-information.webp?s=1024x1024&w=is&k=20&c=BmVSKHJqtUEcv7z5vIORlsEBLSoJh-II8ugj_wpS8k8=" alt="Cliente 1"> <!-- Imagem do cliente -->
+            <h3>João Silva</h3>
+            <p>"Excelente atendimento! Super recomendo!"</p>
+        </div>
+       
+        <div class="carousel-item">
+            <img src="https://cdn.pixabay.com/photo/2021/06/23/16/54/woman-6359198_640.jpg" alt="Cliente 2"> <!-- Imagem do cliente -->
+            <h3>Ana Pereira</h3>
+            <p>"Adorei a experiência! A equipe foi muito atenciosa!"</p>
+        </div>
+        
+        <div class="carousel-item">
+            <img src="https://cdn.create.vista.com/api/media/small/665931570/stock-photo-customer-service-satisfaction-concept-client-man-choosing-star-icon-give" alt="Cliente 3"> <!-- Imagem do cliente -->
+            <h3>Carlos Santos</h3>
+            <p>"Muito satisfeito com o serviço! Voltarei com certeza!"</p>
+        </div>
+        <!-- Item 4 -->
+        <div class="carousel-item">
+            <img src="https://st5.depositphotos.com/12982378/75173/i/380/depositphotos_751730032-stock-photo-passionate-teacher-interacts-students-her.jpg" alt="Cliente 4"> <!-- Imagem do cliente -->
+            <h3>Mariana Costa</h3>
+            <p>"Uma experiência incrível, do começo ao fim. Obrigada!"</p>
+        </div>
+    </div>
+</div>
+
+    <!-- Contato -->
+    <section id="contact" class="mb-20">
+      <h2 class="text-4xl font-extrabold mb-6">Entre em Contato</h2>
+      <p class="text-lg mb-8">Tem alguma dúvida ou deseja mais informações? Entre em contato conosco!</p>
+      <form class="bg-white p-8 shadow-xl rounded-lg">
+        <div class="mb-6">
+          <label for="name" class="block text-gray-700 font-semibold">Nome</label>
+          <input type="text" id="name" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition">
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-gray-700 font-semibold">E-mail</label>
+          <input type="email" id="email" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition">
+        </div>
+        <div class="mb-6">
+          <label for="message" class="block text-gray-700 font-semibold">Mensagem</label>
+          <textarea id="message" rows="4" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition"></textarea>
+        </div>
+        <div class="mb-6">
+          <label for="whatsapp" class="block text-gray-700 font-semibold">WhatsApp</label>
+          <input type="text" id="whatsapp" class="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition" placeholder="Número com DDD (ex: 11 91234-5678)">
+        </div>
+        <button type="submit" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all">Enviar</button>
+      </form>
+      <p class="mt-6 text-lg">Ou fale conosco diretamente no <a href="https://wa.me/5518981500400" class="text-blue-600 font-semibold" target="_blank">WhatsApp</a>.</p>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-white p-6 text-center">
+    <p>&copy; 2025 BluePixel Web Studio. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Carrossel de Agradecimentos
+    let currentIndexAgradecimentos = 0;
+    const itemsAgradecimentos = document.querySelectorAll('.carousel-item');
+    const totalItemsAgradecimentos = itemsAgradecimentos.length;
+
+    function moveToNextAgradecimentos() {
+        currentIndexAgradecimentos = (currentIndexAgradecimentos + 1) % totalItemsAgradecimentos;
+        updateCarouselAgradecimentos();
+    }
+
+    function updateCarouselAgradecimentos() {
+        const newTransformValue = -currentIndexAgradecimentos * 100;
+        document.querySelector('.carousel-inner').style.transform = `translateX(${newTransformValue}%)`;
+    }
+
+    // Rolar automaticamente a cada 4 segundos
+    setInterval(moveToNextAgradecimentos, 4000);
+
+    // Carrossel de Promoções
+    let promoIndex = 0;
+    const promoItems = document.querySelectorAll('.promo-item');
+    const totalPromoItems = promoItems.length;
+
+    function moveToNextPromo() {
+        promoIndex = (promoIndex + 1) % totalPromoItems;
+        updatePromoCarousel();
+    }
+
+    function updatePromoCarousel() {
+        const newTransformValue = -promoIndex * 100;
+        document.querySelector('.promo-carousel-inner').style.transform = `translateX(${newTransformValue}%)`;
+    }
+
+    // Rolar automaticamente a cada 7 segundos
+    setInterval(moveToNextPromo, 7000);
+
+    // Carrossel principal (exemplo)
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carrossel-item');
+    const totalItems = items.length;
+
+    function moveToNext() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        const newTransformValue = -currentIndex * 100;
+        document.querySelector('#carrossel-inner').style.transform = `translateX(${newTransformValue}%)`;
+    }
+
+    // Rolar automaticamente a cada 4 segundos
+    setInterval(moveToNext, 4000);
+</script>
+
+</body>
+</html>
